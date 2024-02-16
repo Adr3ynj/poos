@@ -9,25 +9,37 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/test")
-    public String test(){
+    public String test() {
         return "Hello world, this is my first Project!....";
     }
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam String name,
-                        @RequestParam String lastname,
-                        @RequestParam (required = false) Integer age){
-        String message = "This is my first SpringBootProject!, and my name is: " + name + " " + lastname;
-        if(age != null) {
-            message = message + " and my age is: " + age;
+    @GetMapping("/concat/{name}/{lastname}/{age}")
+    public String concatenate(@RequestParam String name, @RequestParam String lastname, @RequestParam Integer age) {
+        String mensaje = "Este es mi primer proyecto Spring Boot!";
+        if (name != null) {
+            mensaje += " Mi nombre es: " + name;
         }
-        return message;
+        if (lastname != null) {
+            mensaje += " " + lastname;
+        }
+        if (age != 0 & age != null) {
+            mensaje += " y mi edad es: " + age;
+        }
+        return mensaje;
     }
 
-    @GetMapping("/concat/{name}/{lastname}/{age}")
-    public String concatenate(@PathVariable String name, @PathVariable String lastname,@PathVariable int age){
-        return "This is my second rest service!, and my name is: "
-                + name + " " + lastname + "And my age is" + " " + age;
-
+    @GetMapping("/hello")
+    public String hello(@RequestParam String name, @RequestParam String lastname, @RequestParam(required = false) Integer age) {
+        String mensaje = "Este es mi primer proyecto Spring Boot!";
+        if (name != null) {
+            mensaje += " Mi nombre es: " + name;
+        }
+        if (lastname != null) {
+            mensaje += " " + lastname;
+        }
+        if (age != null) {
+            mensaje += " y mi edad es: " + age;
+        }
+        return mensaje;
     }
 }
